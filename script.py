@@ -72,8 +72,8 @@ def run(filename):
         ident(tmp)
         stack = [] 
         stack.append([ x[:] for x in tmp ])
-        print "STACK BEFORE FOR:"
-        print stack
+ #       print "STACK BEFORE FOR:"
+ #       print stack
 
         for command in commands:
             #print command
@@ -92,12 +92,12 @@ def run(filename):
  #               print args
                 add_sphere(tmp,
                            args[0], args[1], args[2], args[3], step)
-                print "TOP OF STACK:"
-                print stack[-1]
+#                print "TOP OF STACK:"
+#                print stack[-1]
                 matrix_mult( stack[-1], tmp )
                 draw_polygons(tmp, screen, color)
-                print "TMP:"
-                print tmp
+#                print "TMP:"
+#                print tmp
                 #print screen
                 tmp = []
             elif c == 'torus':
@@ -110,8 +110,8 @@ def run(filename):
                 x = 1
                 if args[-1] in fd.keys():
                     x = fd[args[-1]]
-                    print "MOVEKNOB:"
-                    print x
+#                    print "MOVEKNOB:"
+#                    print x
                 tmp = make_translate(args[0]*x, args[1]*x, args[2]*x)
                 matrix_mult(stack[-1], tmp)
                 stack[-1] = [x[:] for x in tmp]
@@ -121,8 +121,8 @@ def run(filename):
                 x = 1
                 if args[-1] in fd.keys():
                     x = fd[args[-1]]
-                    print "SCALEKNOB:"
-                    print x
+#                    print "SCALEKNOB:"
+#                    print x
                 tmp = make_scale(args[0]*x, args[1]*x, args[2]*x)
                 matrix_mult(stack[-1], tmp)
                 stack[-1] = [x[:] for x in tmp]
@@ -132,8 +132,8 @@ def run(filename):
                 if args[-1] in fd.keys():
                     x = fd[args[-1]]
                     #print "X " + str(x)
-                    print "ROTATEKNOB:"
-                    print x
+#                    print "ROTATEKNOB:"
+#                    print x
                 theta = args[1]*x * (math.pi/180)
                 if args[0] == 'x':
                    tmp = make_rotX(theta)
@@ -145,8 +145,8 @@ def run(filename):
                 stack[-1] = [ x[:] for x in tmp]
                 tmp = []
             elif c == 'push':
-                print "PUSHSTACK:"
-                print stack[-1]
+#                print "PUSHSTACK:"
+#                print stack[-1]
                 stack.append([l[:] for l in stack[-1]] )
             elif c == 'pop':
                 stack.pop()
@@ -155,7 +155,7 @@ def run(filename):
             elif c == 'save':
                 save_extension(screen, args[0])
         save_extension(screen, "anim/%s%03d.png" % (basename,frame))
-        clear_screen(screen)
+        clear_screen(screen) 
 #        print "SCREEN"
 #        print screen
     os.system('convert anim/%s*.png %s.gif' % (basename,basename))
